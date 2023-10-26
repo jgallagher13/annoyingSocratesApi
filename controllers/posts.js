@@ -19,7 +19,21 @@ async function find(req, res, next) {
         res.status(400).json({ error: 'something went wrong' })
     }
 }
+
+async function deletePost(req, res, next) {
+    try {
+        const post = await Post.findById(req.params.id)
+        await post.deleteOne()
+        res.status(200).json(post)
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: 'something went wrong' })
+    }
+}
+
+
 module.exports = {
     create,
-    find
+    find,
+    deletePost
 }
