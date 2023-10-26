@@ -10,6 +10,16 @@ async function create(req, res, next) {
     }
 }
 
+async function find(req, res, next) {
+    try {
+        const posts = await Post.find({quoteId: req.params.id})
+        res.status(200).json(posts)
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: 'something went wrong' })
+    }
+}
 module.exports = {
-    create
+    create,
+    find
 }
