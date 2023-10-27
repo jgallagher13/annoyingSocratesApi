@@ -14,10 +14,13 @@ const app = express()
 
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:${CLIENTDEVPORT}` }))
 
+app.use(require('./config/checkToken'));
+
 const PORT = process.env.PORT || SERVERDEVPORT
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
 
 app.use('/users', userRouter)
 app.use('/posts', postsRouter)
