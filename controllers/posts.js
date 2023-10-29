@@ -12,7 +12,7 @@ async function create(req, res, next) {
 
 async function find(req, res, next) {
     try {
-        const posts = await Post.find({quoteId: req.params.id})
+        const posts = await Post.find({quoteId: req.params.id}).populate('user')
         res.status(200).json(posts)
     } catch (error) {
         console.log(error)
